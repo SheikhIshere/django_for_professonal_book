@@ -9,3 +9,14 @@ docker-compose exec web python manage.py makemigrations
                         python manage.py createsuperuser
 // check local host
 http://localhost:8000/
+
+
+
+
+
+
+
+// raf
+touch static/css/base.css
+touch static/js/base.js
+touch static/images/.keep

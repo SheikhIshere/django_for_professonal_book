@@ -1,6 +1,6 @@
 <!-- templates/home.html-->
 {% extends "_base.html" %}
-
+ {% load static %}
 
 {% block title %}Home{% endblock title %}
 
@@ -13,7 +13,8 @@
         <form  method="post" action="{% url 'logout' %}">
     {% csrf_token %}
     <button type="submit">Log Out</button>
-</form>
+    </form>
+    <img class="bookcover" src="{% static 'images/Screenshot 2025-09-19 203846.jpeg' %}">
 
     {% else %}
         <p>You are not logged in</p>
