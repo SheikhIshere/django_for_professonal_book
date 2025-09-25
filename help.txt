@@ -1,0 +1,11 @@
+// to start docker
+docker-compose down
+docker-compose up -d --build
+docker-compose logs -f # to check docker logs
+
+// to do migrate or migration into docker superuser
+docker-compose exec web python manage.py makemigrations
+                        python manage.py migrate
+                        python manage.py createsuperuser
+// check local host
+http://localhost:8000/

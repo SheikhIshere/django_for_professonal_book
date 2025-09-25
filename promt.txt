@@ -1,0 +1,60 @@
+now what's the problem
+
+error
+----
+HelloWorld@HelloWorld MINGW64 ~/Desktop/test/docker/3bookstore (main)
+$ docker-compose exec web python manage.py test
+Found 11 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+....E......
+======================================================================
+ERROR: test_signup_view (accounts.tests.SignupTest.test_signup_view)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/accounts/tests.py", line 49, in test_signup_view   
+    view = resolve('/accounts/signup')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 25, in resolve
+    return get_resolver(urlconf).resolve(path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 705, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})        
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'pages.urls' from '/code/pages/urls.py'> (pages:pages) ''>, <URLPattern '' [name='home']>], [<URLResolver <module 'accounts.urls' from '/code/accounts/urls.py'> (accounts:accounts) 'accounts/'>, <URLPattern 'signup/' [name='signup']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'login/' [name='login']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'logout/' [name='logout']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_change/' [name='password_change']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_change/done/' [name='password_change_done']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_reset/' [name='password_reset']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'reset/done/' [name='password_reset_complete']>]], 'path': 'accounts/signup'}
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.916s
+
+FAILED (errors=1)
+Destroying test database for alias 'default'...
+
+
+views.py
+--------
+# accounts/views.py
+from django.views.generic.edit import CreateView
+from .forms import CustomUserCreationForm
+from django.urls import reverse_lazy
+
+
+# Create your views here.
+
+
+class SignupPageView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
+
+
+urls.py
+--------
+# accounts/urls.py
+
+from django.urls import path
+from . import views
+
+app_name = 'accounts'
+
+urlpatterns = [
+    path('signup/', views.SignupPageView.as_view(), name = 'signup')
+]
