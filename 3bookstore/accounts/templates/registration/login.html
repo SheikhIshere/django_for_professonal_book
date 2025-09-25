@@ -1,0 +1,13 @@
+<!-- accounts/templates/registration/login.html -->
+{% block title %}
+    Log In
+{% endblock title %}
+
+{% block content %}
+    <h2>Log in</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log in</button>
+    </form>
+{% endblock content %}
