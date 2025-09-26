@@ -20,3 +20,7 @@ http://localhost:8000/
 touch static/css/base.css
 touch static/js/base.js
 touch static/images/.keep
+
+mkdir accounts/templates/account
+mv accounts/templates/registration/login.html templates/account/login.html
+mv accounts/templates/registration/signup.html templates/account/signup.html
