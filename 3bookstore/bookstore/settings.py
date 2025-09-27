@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
+
+env = Env() # new
+env.read_env() # new
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-sk(&m3^yir5-!#f2tr6k3jt^jq78=yss4k)s)jhx9@ljpi-&pz"
+# SECRET_KEY = ""
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -93,6 +98,7 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# postgres database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -104,6 +110,11 @@ DATABASES = {
     }
 }
 
+# for environmennt (not working)
+# DATABASES = {
+#     "default": env.dj_db_url("DATABASE_URL",
+#     default="postgres://postgres@db/postgres")
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
