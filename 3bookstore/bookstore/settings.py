@@ -169,6 +169,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "pages:home"
 # LOGOUT_REDIRECT_URL = "pages:home"
 ACCOUNT_LOGOUT_REDIRECT = "pages:home"
+LOGIN_URL = 'account_login'
 
 
 # django-allauth config
