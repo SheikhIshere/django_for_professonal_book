@@ -28,6 +28,7 @@ urlpatterns = [
     
     # local apps
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path("books/", include("books.urls")),  # new
+
 
 ]

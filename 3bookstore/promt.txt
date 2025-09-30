@@ -2,59 +2,213 @@ now what's the problem
 
 error
 ----
-HelloWorld@HelloWorld MINGW64 ~/Desktop/test/docker/3bookstore (main)
-$ docker-compose exec web python manage.py test
-Found 11 test(s).
-Creating test database for alias 'default'...
-System check identified no issues (0 silenced).
-....E......
-======================================================================
-ERROR: test_signup_view (accounts.tests.SignupTest.test_signup_view)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/code/accounts/tests.py", line 49, in test_signup_view   
-    view = resolve('/accounts/signup')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/django/urls/base.py", line 25, in resolve
-    return get_resolver(urlconf).resolve(path)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py", line 705, in resolve
-    raise Resolver404({"tried": tried, "path": new_path})        
-django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'pages.urls' from '/code/pages/urls.py'> (pages:pages) ''>, <URLPattern '' [name='home']>], [<URLResolver <module 'accounts.urls' from '/code/accounts/urls.py'> (accounts:accounts) 'accounts/'>, <URLPattern 'signup/' [name='signup']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'login/' [name='login']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'logout/' [name='logout']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_change/' [name='password_change']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_change/done/' [name='password_change_done']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_reset/' [name='password_reset']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'password_reset/done/' [name='password_reset_done']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'reset/<uidb64>/<token>/' [name='password_reset_confirm']>], [<URLResolver <module 'django.contrib.auth.urls' from '/usr/local/lib/python3.12/site-packages/django/contrib/auth/urls.py'> (None:None) 'accounts/'>, <URLPattern 'reset/done/' [name='password_reset_complete']>]], 'path': 'accounts/signup'}
+NoReverseMatch at /books/
+Reverse for 'book_detail' with arguments '('1',)' not found. 1 pattern(s) tried: ['books/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/\\Z']
+Request Method:	GET
+Request URL:	http://localhost:8000/books/
+Django Version:	5.2.6
+Exception Type:	NoReverseMatch
+Exception Value:	
+Reverse for 'book_detail' with arguments '('1',)' not found. 1 pattern(s) tried: ['books/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/\\Z']
+Exception Location:	/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py, line 831, in _reverse_with_prefix
+Raised during:	books.views.BookListView
+Python Executable:	/usr/local/bin/python
+Python Version:	3.12.11
+Python Path:	
+['/code',
+ '/usr/local/lib/python312.zip',
+ '/usr/local/lib/python3.12',
+ '/usr/local/lib/python3.12/lib-dynload',
+ '/usr/local/lib/python3.12/site-packages']
+Server time:	Tue, 30 Sep 2025 10:36:26 +0000
+Error during template rendering
+In template /code/books/templates/books/book_list.html, error at line 9
 
-----------------------------------------------------------------------
-Ran 11 tests in 0.916s
-
-FAILED (errors=1)
-Destroying test database for alias 'default'...
-
+Reverse for 'book_detail' with arguments '('1',)' not found. 1 pattern(s) tried: ['books/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/\\Z']
+1	<!-- templates/books/book_list.html-->
+2	{% extends "_base.html" %} {% block title %}Books{% endblock title %} 
+3	
+4	
+5	{% block content %} 
+6	
+7	{% for book in books_list %}
+8	<div>
+9	    <h2><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h2>
+10	</div>
+11	{% endfor %} 
+12	
+13	{% endblock content %}
+14	
+Traceback Switch to copy-and-paste view
+/usr/local/lib/python3.12/site-packages/django/core/handlers/exception.py, line 55, in inner
+                response = get_response(request)
+                               ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/core/handlers/base.py, line 220, in _get_response
+                response = response.render()
+                                ^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/response.py, line 114, in render
+            self.content = self.rendered_content
+                                ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/response.py, line 92, in rendered_content
+        return template.render(context, self._request)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/backends/django.py, line 107, in render
+            return self.template.render(context)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 171, in render
+                    return self._render(context)
+                                ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 163, in _render
+        return self.nodelist.render(context)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 1016, in render
+        return SafeString("".join([node.render_annotated(context) for node in self]))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 977, in render_annotated
+            return self.render(context)
+                        ^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py, line 159, in render
+            return compiled_parent._render(context)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 163, in _render
+        return self.nodelist.render(context)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 1016, in render
+        return SafeString("".join([node.render_annotated(context) for node in self]))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 977, in render_annotated
+            return self.render(context)
+                        ^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/loader_tags.py, line 65, in render
+                result = block.nodelist.render(context)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 1016, in render
+        return SafeString("".join([node.render_annotated(context) for node in self]))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 977, in render_annotated
+            return self.render(context)
+                        ^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/defaulttags.py, line 243, in render
+                    nodelist.append(node.render_annotated(context))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 977, in render_annotated
+            return self.render(context)
+                        ^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 1075, in render
+            output = self.filter_expression.resolve(context)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 722, in resolve
+                obj = self.var.resolve(context)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 854, in resolve
+            value = self._resolve_lookup(context)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/template/base.py, line 925, in _resolve_lookup
+                            current = current()
+                                           ^^^^^^^^^ …
+Local vars
+/code/books/models.py, line 22, in get_absolute_url
+        return reverse('book_detail', args=[str(self.id)])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/urls/base.py, line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/usr/local/lib/python3.12/site-packages/django/urls/resolvers.py, line 831, in _reverse_with_prefix
+        raise NoReverseMatch(msg)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
 
 views.py
 --------
-# accounts/views.py
-from django.views.generic.edit import CreateView
-from .forms import CustomUserCreationForm
-from django.urls import reverse_lazy
+# books/views.py
+from django.views.generic import ListView
+from django.views.generic import DetailView
+from .models import Book
 
 
-# Create your views here.
+class BookListView(ListView):
+    model = Book
+    context_object_name = 'books_list' # if i don't use it i have to use object_list on the template page to ac access
+    template_name = 'books/book_list.html'
 
 
-class SignupPageView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+class BookDetailsView(DetailView):
+    model = Book
+    context_object_name = 'book'
+    template_name = 'books/book_details.html'
 
 
 urls.py
 --------
-# accounts/urls.py
-
 from django.urls import path
-from . import views
-
-app_name = 'accounts'
-
+from .views import BookListView, BookDetailsView
 urlpatterns = [
-    path('signup/', views.SignupPageView.as_view(), name = 'signup')
+    path('', BookListView.as_view(), name = 'book_list'),
+    path('<uuid:pk>/', BookDetailsView.as_view(), name = 'book_detail')
 ]
+
+
+models.py
+----------
+# books/models.py
+import uuid
+from django.db import models
+from django.urls import reverse
+
+
+# Create your models here.
+
+class Book(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4, editable= False
+    )
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('book_detail', args=[str(self.id)])
+
+
+books/temmplates/book_list.html
+-------------------------------
+<!-- templates/books/book_list.html-->
+{% extends "_base.html" %} {% block title %}Books{% endblock title %} 
+
+
+{% block content %} 
+
+{% for book in books_list %}
+<div>
+    <h2><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h2>
+</div>
+{% endfor %} 
+
+{% endblock content %}

@@ -28,3 +28,20 @@ mv accounts/templates/registration/signup.html templates/account/signup.html
 
 touch accounts/templates/account/email/email_confirmation_subject.txt
 touch accounts/templates/account/email/email_confirmation_message.txt
+
+
+$  docker volume ls
+DRIVER    VOLUME NAME
+local     3bookstore_postgres_data
+local     bookstore_postgres_data
+local     postgres_sql_postgres_data
+local     project_postgres_data
+
+delete the volume
+and make me the command
+
+docker volume rm bookstore_postgres_data
+docker-compose up-d
+docker-compose exec web python manage.py makemigrations books
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
