@@ -24,3 +24,7 @@ touch static/images/.keep
 mkdir accounts/templates/account
 mv accounts/templates/registration/login.html templates/account/login.html
 mv accounts/templates/registration/signup.html templates/account/signup.html
+
+
+touch accounts/templates/account/email/email_confirmation_subject.txt
+touch accounts/templates/account/email/email_confirmation_message.txt
