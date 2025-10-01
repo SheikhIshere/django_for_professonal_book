@@ -15,12 +15,18 @@ class BookListView(LoginRequiredMixin, ListView):
     template_name = 'books/book_list.html'
 
 
-class BookDetailsView(LoginRequiredMixin,PermissionRequiredMixin, DetailView):
+class BookDetailsView(
+    LoginRequiredMixin,
+    PermissionRequiredMixin, 
+    DetailView
+):
     model = Book
     context_object_name = 'book'
     template_name = 'books/book_details.html'
     login_url = 'accounts:signup'
     permission_required = 'books.speial_status' 
+    queryset = Book.objects.all().prefetch_related('reviews__author',) # new
+
 
 class SearchResultsListView(ListView):
     model = Book

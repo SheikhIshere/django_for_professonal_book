@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 # bookstore/urls.py
 from django.contrib import admin
 from django.urls import path, include
@@ -22,14 +23,21 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     # static page
     path('', include('pages.urls')),
-    
-    # user management
-    path('accounts/', include('allauth.urls')),
-    
-    # local apps
-    path('accounts/', include('django.contrib.auth.urls')),
-    path("books/", include("books.urls")),  # new
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # user management
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+
+    # local apps
+    path("books/", include("books.urls")),  # new
+]
+
+# Debug Toolbar (only in DEBUG mode)
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from environs import Env
+import socket
+
+# from INTERNAL_IPS 
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
 env = Env() # new
 env.read_env() # new
@@ -43,11 +48,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    
     # third-party
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
+    "debug_toolbar", # new
+
     # local apps
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
@@ -60,6 +68,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
+     "django.middleware.cache.UpdateCacheMiddleware", # for cache memory 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,7 +77,15 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'allauth.account.middleware.AccountMiddleware', # from allauth
+    "debug_toolbar.middleware.DebugToolbarMiddleware", # from django_toolbar
+    "django.middleware.cache.FetchFromCacheMiddleware", # for cache memory 
 ]
+
+# cach memory setting
+CACHE_MIDDLEWARE_ALIAS = "default"
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
+# cach memory setting end
 
 ROOT_URLCONF = "bookstore.urls"
 
