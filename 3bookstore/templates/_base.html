@@ -50,6 +50,9 @@
           <a class="nav-link" href="{% url 'book_list' %}">All Books</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'search_results' %}">Search Books</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-danger fw-semibold" href="{% url 'account_logout' %}">Log Out</a>
         </li>
         {% else %}

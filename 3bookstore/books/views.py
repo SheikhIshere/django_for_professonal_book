@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     LoginRequiredMixin
 )
+from django.db.models import Q
 
 
 class BookListView(LoginRequiredMixin, ListView):
@@ -20,3 +21,15 @@ class BookDetailsView(LoginRequiredMixin,PermissionRequiredMixin, DetailView):
     template_name = 'books/book_details.html'
     login_url = 'accounts:signup'
     permission_required = 'books.speial_status' 
+
+class SearchResultsListView(ListView):
+    model = Book
+    context_object_name = "book_list"
+    template_name = "filter/search_results.html"
+    """ queryset = Book.objects.filter(title__icontains="professonal") """
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Book.objects.filter(
+            Q(title__icontains = query) | Q(author__icontains= query)
+        )
