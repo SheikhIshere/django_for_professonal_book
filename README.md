@@ -1,0 +1,3 @@
+This book is an older version, so many projects at the end do not work properly. I find it disappointing that both "Django for Professionals" and "Django for APIs" use outdated versions of Django and the Django REST Framework. However, the books provide essential knowledge for any Django developer and are rich in content. I would rate them 4 out of 5: 3 for content and 1 for structure.
+
+Readers should consider these books for core concepts rather than everything due to the version gap. I appreciate the author, Mr. William S. Vincent, for this valuable material. Although I couldn’t support you financially because I found the PDF online, I view you as my tutor. As a diploma holder, I’m grateful to have found your book. Keep shining like a star in our hearts!
